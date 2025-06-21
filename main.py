@@ -3,7 +3,7 @@ import os
 import time
 
 window_capture = "getWindow.py"
-feedback = "blip2.py"
+feedback = "critiqueResponse.py"  # changed from blip2.py
 image_dir = "captured_images"
 
 def wait_for_first_image():
@@ -20,19 +20,19 @@ def run_script_background(script_name):
 def main():
     os.makedirs(image_dir, exist_ok=True)
 
-    print("Launching canvas capture")
+    print("🚀 Launching canvas capture")
     capture_proc = run_script_background(window_capture)
 
     wait_for_first_image()
 
-    print("Launching analysis")
+    print("🎨 Launching drawing feedback system")
     feedback_proc = run_script_background(feedback)
 
     try:
         capture_proc.wait()
         feedback_proc.wait()
     except KeyboardInterrupt:
-        print("\nTerminating process")
+        print("\n🛑 Terminating processes")
         capture_proc.terminate()
         feedback_proc.terminate()
 
