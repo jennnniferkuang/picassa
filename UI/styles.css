@@ -1,4 +1,42 @@
-body,
+body{
+  margin: 0;
+}
+
+#titlebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 4px 8px;
+  background: transparent;
+  -webkit-app-region: drag; /* Let user drag from here */
+  z-index: 10;
+}
+
+#close-btn {
+  font-size: 20px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+#close-btn:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
 html {
   height: 100%;
   margin: 0;
@@ -95,6 +133,16 @@ body {
   font-size: 12px;
   height: 32px;
   min-width: 50px;
+}
+
+#analyze-button {
+  background-color: white;
+  border: none;
+  color: black;
+  border-radius: 6vmin;
+  padding: 3.2vmin 6vmin;
+  margin-left: 4vmin;
+  cursor: pointer;
 }
 
 #send-button:hover {

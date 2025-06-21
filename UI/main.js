@@ -18,14 +18,20 @@ function createWindow() {
     x: Math.round(screenWidth - winWidth - 50),
     y: Math.round(screenHeight - winHeight - 20),
     transparent: true,
-    frame: false,
+    frame: false, // ✅ Disables OS title bar
     alwaysOnTop: true,
     resizable: true,
+<<<<<<< Updated upstream
     minWidth: Math.round(minWidth),
     minHeight: Math.round(minHeight),
     vibrancy: 'under-window',
     skipTaskbar: true,
     title: '',
+=======
+    skipTaskbar: true,
+    vibrancy: 'under-window',
+    titleBarStyle: 'hidden', // ✅ Needed for macOS
+>>>>>>> Stashed changes
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
@@ -43,6 +49,24 @@ function createWindow() {
   });
 
   mainWindow.loadFile('index.html');
+
+  // 🔽 HACK: Avoid ghost titlebar on Windows blur
+  if (process.platform === 'win32') {
+    mainWindow.on('blur', () => {
+      mainWindow.setFocusable(false);
+    });
+
+    mainWindow.on('focus', () => {
+      mainWindow.setFocusable(true);
+    });
+  }
+
+  const { ipcMain } = require("electron");
+
+  ipcMain.on("app-close", () => {
+    BrowserWindow.getAllWindows().forEach(win => app.quit()
+  );
+  });
 }
 
 app.whenReady().then(createWindow);

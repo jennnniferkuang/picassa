@@ -7,9 +7,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key="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")
 
-image_dir = "captured_images"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+image_dir = os.path.abspath(os.path.join(BASE_DIR, "..", "captured_images"))
+
 feedback_interval = 10
 cleanup_interval = feedback_interval * 2
 
@@ -34,7 +36,7 @@ def stream_feedback(image_path):
                 {
                     "role": "user",
                     "content": [
-                        {"type": "text", "text": "Here is my current drawing. What should I improve on?"},
+                        {"type": "text", "text": "Here is my current work in progress drawing. What should I improve on?"},
                         {"type": "image_url", "image_url": {"url": image_url}}
                     ]
                 }

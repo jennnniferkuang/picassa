@@ -2,6 +2,12 @@ const messages = document.getElementById("messages");
 const messageInput = document.getElementById("message-input");
 const sendButton = document.getElementById("send-button");
 
+const { ipcRenderer } = require('electron');
+
+document.getElementById("close-btn").addEventListener("click", () => {
+  ipcRenderer.send("app-close");
+});
+
 function addMessage(text, sender) {
   const messageElement = document.createElement("div");
   messageElement.classList.add("message", sender);
