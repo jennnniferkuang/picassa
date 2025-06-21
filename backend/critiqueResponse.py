@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="OPEN_AI_API_KEY")
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 image_dir = os.path.abspath(os.path.join(BASE_DIR, "..", "captured_images"))

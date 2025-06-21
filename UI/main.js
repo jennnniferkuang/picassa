@@ -21,17 +21,12 @@ function createWindow() {
     frame: false, // ✅ Disables OS title bar
     alwaysOnTop: true,
     resizable: true,
-<<<<<<< Updated upstream
     minWidth: Math.round(minWidth),
     minHeight: Math.round(minHeight),
     vibrancy: 'under-window',
-    skipTaskbar: true,
     title: '',
-=======
     skipTaskbar: true,
-    vibrancy: 'under-window',
     titleBarStyle: 'hidden', // ✅ Needed for macOS
->>>>>>> Stashed changes
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
