@@ -4,3 +4,5 @@ pillow
 pyautogui
 torch
 transformers
+flask
+flask-cors

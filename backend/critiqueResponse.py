@@ -4,7 +4,6 @@ import base64
 from datetime import datetime
 from openai import OpenAI  
 from dotenv import load_dotenv
-from openai.types.chat import ChatCompletionMessageParam 
 
 load_dotenv()
 
@@ -23,7 +22,7 @@ def image_to_base64(image_path):
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode("utf-8")
 
-def give_feedback(image_path):
+def stream_feedback(image_path):
     image_b64 = image_to_base64(image_path)
     image_url = f"data:image/png;base64,{image_b64}"
 
@@ -39,11 +38,12 @@ def give_feedback(image_path):
                         {"type": "image_url", "image_url": {"url": image_url}}
                     ]
                 }
-            ]
+            ],
+            stream=True 
         )
-        feedback = response.choices[0].message.content
-        timestamp = datetime.now().strftime("%H:%M:%S")
-        print(f"\n📝 [{timestamp}] Feedback for {os.path.basename(image_path)}:\n➡ {feedback}")
+        for chunk in response:
+            if chunk.choices[0].delta.content:
+                print(chunk.choices[0].delta.content, end="", flush=True)
     except Exception as e:
         print(f"❌ Error generating feedback: {e}")
 
@@ -60,9 +60,10 @@ def main():
 
     while True:
         images = get_sorted_images()
+
         if images:
             latest_image = os.path.join(image_dir, images[-1])
-            give_feedback(latest_image)
+            stream_feedback(latest_image)
 
         if time.time() - last_cleanup >= cleanup_interval:
             delete_oldest_image()
