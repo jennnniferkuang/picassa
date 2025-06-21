@@ -21,12 +21,12 @@ body {
 #chat-container {
   -webkit-app-region: drag;
   background-color: rgba(60, 60, 60, 0.5);
-  border-radius: 10vmin;
+  border-radius: 15px;
   height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 6vmin;
+  padding: 15px;
 }
 
 #messages {
@@ -36,15 +36,16 @@ body {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 3.2vmin;
-  margin-bottom: 4vmin;
+  gap: 8px;
+  margin-bottom: 10px;
 }
 
 .message {
-  padding: 3.2vmin 4.8vmin;
-  border-radius: 6vmin;
+  padding: 8px 12px;
+  border-radius: 15px;
   max-width: 80%;
   word-wrap: break-word;
+  font-size: 12px;
 }
 
 .message.bot {
@@ -64,16 +65,19 @@ body {
   padding: 0;
   align-items: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  height: 40px;
 }
 
 #message-input {
   flex-grow: 1;
   background-color: rgba(255, 255, 255, 0.2);
   border: none;
-  border-radius: 6vmin;
-  padding: 3.2vmin 4.8vmin;
+  border-radius: 15px;
+  padding: 8px 12px;
   color: white;
   outline: none;
+  font-size: 12px;
+  height: 32px;
 }
 
 #message-input::placeholder {
@@ -84,18 +88,15 @@ body {
   background-color: white;
   border: none;
   color: black;
-  border-radius: 6vmin;
-  padding: 3.2vmin 6vmin;
-  margin-left: 4vmin;
+  border-radius: 15px;
+  padding: 8px 16px;
+  margin-left: 10px;
   cursor: pointer;
+  font-size: 12px;
+  height: 32px;
+  min-width: 50px;
 }
 
 #send-button:hover {
   background-color: #dddddd;
-}
-
-.message,
-#message-input,
-#send-button {
-  font-size: 5.6vmin;
 } 
