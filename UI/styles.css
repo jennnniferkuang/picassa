@@ -99,4 +99,35 @@ body {
 
 #send-button:hover {
   background-color: #dddddd;
+}
+
+/* Markdown Styling */
+.message h1, .message h2, .message h3 {
+  margin: 10px 0 5px 0;
+  font-weight: 600;
+  color: #fff;
+}
+.message h1 { font-size: 1.4em; }
+.message h2 { font-size: 1.2em; }
+.message h3 { font-size: 1.1em; }
+
+.message strong {
+  font-weight: 600;
+}
+
+.message em {
+  font-style: italic;
+}
+
+.message code {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 2px 5px;
+  border-radius: 4px;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+.message br {
+  display: block;
+  content: "";
+  margin-top: 0.5em;
 } 

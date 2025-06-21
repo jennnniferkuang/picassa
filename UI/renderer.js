@@ -3,12 +3,41 @@ const messageInput = document.getElementById("message-input");
 const sendButton = document.getElementById("send-button");
 
 // Backend URL - adjust this to match your Flask server
-const BACKEND_URL = 'http://localhost:5000';
+const BACKEND_URL = 'http://localhost:5001';
+
+/**
+ * Parses a complete string with markdown and converts it to HTML.
+ * @param {string} text - The text to parse.
+ * @returns {string} - HTML string.
+ */
+function parseMarkdown(text) {
+  // Headers (h1, h2, h3)
+  text = text.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+  text = text.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+  text = text.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+  // Bold
+  text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/__(.*?)__/g, '<strong>$1</strong>');
+
+  // Italic
+  text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+  text = text.replace(/_(.*?)_/g, '<em>$1</em>');
+  
+  // Inline code
+  text = text.replace(/`(.*?)`/g, '<code>$1</code>');
+
+  // New lines
+  text = text.replace(/\n/g, '<br>');
+
+  return text;
+}
 
 function addMessage(text, sender) {
   const messageElement = document.createElement("div");
   messageElement.classList.add("message", sender);
-  messageElement.textContent = text;
+  // Use innerHTML to render markdown
+  messageElement.innerHTML = parseMarkdown(text); 
   messages.appendChild(messageElement);
   messages.scrollTop = messages.scrollHeight;
   return messageElement;
@@ -17,7 +46,7 @@ function addMessage(text, sender) {
 function addStreamingMessage(sender) {
   const messageElement = document.createElement("div");
   messageElement.classList.add("message", sender);
-  messageElement.textContent = "";
+  messageElement.innerHTML = ""; // Start with empty innerHTML
   messages.appendChild(messageElement);
   messages.scrollTop = messages.scrollHeight;
   return messageElement;
@@ -25,26 +54,23 @@ function addStreamingMessage(sender) {
 
 async function analyzeLatestImage() {
   try {
-    // Show analyzing message
     const analyzingMsg = addMessage("Analyzing your latest drawing...", "bot");
     
-    // Call the backend endpoint
     const response = await fetch(`${BACKEND_URL}/critique/latest/stream`);
     
     if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+      const err = await response.json();
+      throw new Error(`Error ${response.status}: ${err.error.message}`);
     }
     
-    // Create streaming message
     const streamingMsg = addStreamingMessage("bot");
+    let currentText = "";
     
-    // Read the streaming response
     const reader = response.body.getReader();
     const decoder = new TextDecoder();
     
     while (true) {
       const { done, value } = await reader.read();
-      if (done) break;
       
       const chunk = decoder.decode(value);
       const lines = chunk.split('\n');
@@ -55,27 +81,37 @@ async function analyzeLatestImage() {
             const data = JSON.parse(line.slice(6));
             
             if (data.error) {
-              streamingMsg.textContent = `Error: ${data.error}`;
-              break;
+              streamingMsg.innerHTML = parseMarkdown(`**Error:** ${data.error}`);
+              return;
             } else if (data.content) {
-              streamingMsg.textContent += data.content;
+              currentText += data.content;
+              // For streaming, we just update the text content directly for performance
+              // and to avoid layout shifts. We'll parse markdown at the end.
+              streamingMsg.innerHTML = parseMarkdown(currentText); // Live parsing
               messages.scrollTop = messages.scrollHeight;
             } else if (data.done) {
-              break;
+              // Final parse when streaming is complete
+              streamingMsg.innerHTML = parseMarkdown(currentText);
+              analyzingMsg.remove();
+              return; // Exit loop
             }
           } catch (e) {
-            console.error('Error parsing SSE data:', e);
+            console.error('Error parsing SSE data:', e, "Line:", line);
           }
         }
       }
+
+      if (done) {
+        // Final parse in case the stream ends without a 'done' message
+        streamingMsg.innerHTML = parseMarkdown(currentText);
+        analyzingMsg.remove();
+        break;
+      }
     }
-    
-    // Remove the analyzing message
-    analyzingMsg.remove();
     
   } catch (error) {
     console.error('Error:', error);
-    addMessage(`Error: ${error.message}`, "bot");
+    addMessage(`**Error:** ${error.message}`, "bot");
   }
 }
 
@@ -84,8 +120,9 @@ function handleSend() {
   if (text) {
     addMessage(text, "user");
     messageInput.value = "";
-    
-    // Trigger the analyze function
+    analyzeLatestImage();
+  } else {
+    // If no text, just analyze
     analyzeLatestImage();
   }
 }
