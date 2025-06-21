@@ -96,7 +96,7 @@ def main():
     try:
         hwnd = get_hwnd(window_title)
         print(f"\n🪟 Found window handle for '{window_title}'")
-        win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)  # Unminimize if minimized
+        win32gui.ShowWindow(hwnd, win32con.SW_MAXIMIZE)  # Unminimize if minimized
         win32gui.SetForegroundWindow(hwnd)              # Focus the window
         time.sleep(1)
     except Exception as e:
