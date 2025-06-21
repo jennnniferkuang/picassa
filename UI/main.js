@@ -27,8 +27,9 @@ function createWindow() {
     skipTaskbar: true,
     title: '',
     webPreferences: {
-      nodeIntegration: true,
-      contextIsolation: false,
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
     },
   });
 
