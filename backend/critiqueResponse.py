@@ -2,10 +2,13 @@ import os
 import time
 import base64
 from datetime import datetime
-from openai import OpenAI  # NEW
+from openai import OpenAI  
+from dotenv import load_dotenv
 from openai.types.chat import ChatCompletionMessageParam 
 
-client = OpenAI(api_key="KEY")
+load_dotenv()
+
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 image_dir = "captured_images"
 feedback_interval = 10
@@ -36,9 +39,7 @@ def give_feedback(image_path):
                         {"type": "image_url", "image_url": {"url": image_url}}
                     ]
                 }
-            ],
-            max_tokens=150,
-            temperature=0.7
+            ]
         )
         feedback = response.choices[0].message.content
         timestamp = datetime.now().strftime("%H:%M:%S")
