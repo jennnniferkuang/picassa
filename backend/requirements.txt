@@ -1,0 +1,8 @@
+openai
+python-dotenv
+pillow
+pyautogui
+torch
+transformers
+flask
+flask-cors
