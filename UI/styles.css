@@ -45,6 +45,11 @@ body {
   transform: scale(0.95);
 }
 
+.sidebar-button.active {
+  background-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
 #main-content {
   flex: 1;
   display: flex;
@@ -229,4 +234,61 @@ html {
   display: block;
   content: "";
   margin-top: 0.5em;
+}
+
+/* Page System */
+.page {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.page.active {
+  display: flex;
+}
+
+#blank-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(60, 60, 60, 0.5);
+  border-radius: 0 0 15px 0;
+  padding: 20px;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#blank-container:hover {
+  background-color: rgba(80, 80, 80, 0.7);
+}
+
+#blank-container h2 {
+  display: none;
+}
+
+#blank-container p {
+  font-size: 16px;
+  font-weight: 500;
+  opacity: 0.9;
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+#import-image {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
+  opacity: 0.8;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+#blank-container:hover #import-image {
+  opacity: 1;
+  transform: scale(1.05);
 } 
