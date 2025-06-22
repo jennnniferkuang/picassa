@@ -103,10 +103,11 @@ body {
 #input-container {
   -webkit-app-region: no-drag;
   display: flex;
-  padding: 0;
+  justify-content: center;
+  padding: 5px 0 0 0;
   align-items: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  height: 40px;
+  height: 45px;
 }
 
 #message-input {
@@ -130,12 +131,10 @@ body {
   border: none;
   color: black;
   border-radius: 15px;
-  padding: 8px 16px;
-  margin-left: 10px;
+  padding: 8px 24px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
   height: 32px;
-  min-width: 50px;
 }
 
 #send-button:hover {

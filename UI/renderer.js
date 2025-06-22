@@ -1,5 +1,4 @@
 const messages = document.getElementById("messages");
-const messageInput = document.getElementById("message-input");
 const sendButton = document.getElementById("send-button");
 const closeIcon = document.getElementById("close-icon");
 
@@ -101,7 +100,7 @@ async function analyzeLatestImage() {
               // Final parse when streaming is complete
               streamingMsg.innerHTML = parseMarkdown(currentText);
               analyzingMsg.remove();
-              return; // Exit loop
+              return; 
             }
           } catch (e) {
             console.error('Error parsing SSE data:', e, "Line:", line);
@@ -123,22 +122,4 @@ async function analyzeLatestImage() {
   }
 }
 
-function handleSend() {
-  const text = messageInput.value.trim();
-  if (text) {
-    addMessage(text, "user");
-    messageInput.value = "";
-    analyzeLatestImage();
-  } else {
-    // If no text, just analyze
-    analyzeLatestImage();
-  }
-}
-
-sendButton.addEventListener("click", handleSend);
-
-messageInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    handleSend();
-  }
-}); 
+sendButton.addEventListener("click", analyzeLatestImage); 
