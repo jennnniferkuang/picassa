@@ -7,20 +7,6 @@ const BACKEND_URL = 'http://localhost:5001';
 
 // Close app functionality
 closeIcon.addEventListener("click", () => {
-  window.electronAPI.closeApp();
-});
-
-// Sidebar button functionality
-homeButton.addEventListener("click", () => {
-  console.log("Home button clicked");
-  // Add your home functionality here
-  // For example: reset chat, go to main screen, etc.
-});
-
-settingsButton.addEventListener("click", () => {
-  console.log("Settings button clicked");
-  // Add your settings functionality here
-  // For example: open settings modal, preferences, etc.
   // Send message to main process to close the app
   const { ipcRenderer } = require('electron');
   ipcRenderer.send('app-close');

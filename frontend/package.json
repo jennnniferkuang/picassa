@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
+    "dev": "concurrently \"npm --prefix frontend run dev\" \"electronmon electron/main.js\"",
     "start": "electron .",
     "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,6 +15,7 @@
   "type": "commonjs",
   "devDependencies": {
     "@electron-toolkit/eslint-config-prettier": "^3.0.0",
-    "electron": "^36.5.0"
+    "electron": "^36.5.0",
+    "electronmon": "^2.0.3"
   }
 }

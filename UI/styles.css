@@ -9,7 +9,7 @@ body {
 #sidebar {
   -webkit-app-region: drag;
   width: 60px;
-  background-color: rgba(60, 60, 60, 0.9);
+  background-color: rgba(60, 60, 60);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   flex-direction: column;
@@ -72,18 +72,45 @@ html {
   box-sizing: inherit;
 }
 
+.navbar-title {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  -webkit-app-region: no-drag;
+}
+
+.navbar-icon {
+  color: white;
+  font-size: 14px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.navbar-icon:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ff4444;
+  transform: scale(1.1);
+}
+
 #navbar {
   -webkit-app-region: drag;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 15px;
-  background-color: rgba(60, 60, 60, 0.9);
+  background-color: rgba(60, 60, 60);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   height: 40px;
   box-sizing: border-box;
   border-radius: 0 15px 0 0;
-  flex-shrink: 0;
 }
 
 .navbar-title {
@@ -116,9 +143,10 @@ html {
 
 #chat-container {
   -webkit-app-region: drag;
-  background-color: rgba(60, 60, 60, 0.5);
+  background-color: rgba(60, 60, 60);
   border-radius: 0 0 15px 0;
   flex: 1;
+  border-radius: 0 0 15px 0;
   display: flex;
   flex-direction: column;
   padding: 15px;
@@ -165,7 +193,8 @@ html {
 #input-container {
   -webkit-app-region: no-drag;
   display: flex;
-  padding: 0;
+  justify-content: center;
+  padding: 5px 0 0 0;
   align-items: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   height: 40px;
@@ -193,12 +222,10 @@ html {
   border: none;
   color: black;
   border-radius: 15px;
-  padding: 8px 16px;
-  margin-left: 10px;
+  padding: 8px 24px;
   cursor: pointer;
-  font-size: 12px;
+  font-size: 14px;
   height: 32px;
-  min-width: 50px;
 }
 
 #send-button:hover {

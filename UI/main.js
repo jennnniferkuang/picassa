@@ -1,5 +1,7 @@
 const { app, BrowserWindow, screen, ipcMain } = require('electron');
 const path = require('path');
+const { spawn } = require("child_process");
+const os = require("os");
 
 function createWindow() {
   const { width: screenWidth, height: screenHeight } = screen.getPrimaryDisplay().workAreaSize;
@@ -26,6 +28,7 @@ function createWindow() {
     vibrancy: 'under-window',
     skipTaskbar: true,
     title: '',
+    hasShadow: true,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -39,7 +42,7 @@ function createWindow() {
 
   // Make window more transparent when it loses focus
   mainWindow.on('blur', () => {
-    mainWindow.setOpacity(0.5);
+    mainWindow.setOpacity(0.9);
   });
 
   // Restore opacity when window gains focus
@@ -49,6 +52,24 @@ function createWindow() {
 
   mainWindow.loadFile('index.html');
 }
+
+// Use the correct Python executable depending on the platform
+const pythonExecutable = process.platform === 'win32' ? 'python' : 'python3';
+
+// Resolve the absolute path to main.py
+const backendScript = path.join(__dirname, '..', 'backend', 'main.py');
+
+// Spawn the backend process
+const backendProcess = spawn(
+  pythonExecutable,
+  [backendScript],
+  { stdio: 'inherit', shell: false }
+);
+
+// Optional: Handle backend process exit
+backendProcess.on('close', (code) => {
+  console.log(`Backend process exited with code ${code}`);
+});
 
 app.whenReady().then(createWindow);
 
