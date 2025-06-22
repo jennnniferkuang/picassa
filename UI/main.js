@@ -7,18 +7,18 @@ function createWindow() {
   const { width: screenWidth, height: screenHeight } = screen.getPrimaryDisplay().workAreaSize;
   
   // Calculate window size as a percentage of screen size
-  const winWidth = Math.max(350, Math.min(500, screenWidth * 0.25)); // 25% of screen width, min 350px, max 500px
-  const winHeight = Math.max(400, Math.min(700, screenHeight * 0.4)); // 40% of screen height, min 400px, max 700px
+  const winWidth = Math.max(370, Math.min(500, screenWidth * 0.25)); // 25% of screen width, min 350px, max 500px
+  const winHeight = Math.max(420, Math.min(700, screenHeight * 0.4)); // 40% of screen height, min 400px, max 700px
   
   // Calculate minimum sizes based on screen size
-  const minWidth = Math.max(350, screenWidth * 0.15); // 15% of screen width, min 350px
+  const minWidth = Math.max(380, screenWidth * 0.15); // 15% of screen width, min 350px
   const minHeight = Math.max(300, screenHeight * 0.25); // 25% of screen height, min 300px
 
   const mainWindow = new BrowserWindow({
     width: Math.round(winWidth),
     height: Math.round(winHeight),
-    x: Math.round(screenWidth - winWidth - 50),
-    y: Math.round(screenHeight - winHeight - 20),
+    x: Math.round(screenWidth - winWidth - 30),
+    y: Math.round(screenHeight - winHeight - 60),
     transparent: true,
     frame: false,
     alwaysOnTop: true,
