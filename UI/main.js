@@ -1,5 +1,6 @@
 const { app, BrowserWindow, screen, ipcMain, dialog } = require('electron');
 const path = require('path');
+const fs = require('fs');
 
 function createWindow() {
   const { width: screenWidth, height: screenHeight } = screen.getPrimaryDisplay().workAreaSize;
@@ -64,6 +65,35 @@ ipcMain.handle('select-directory', async () => {
     .map(file => path.join(dirPath, file));
 
   return pngFiles;
+});
+
+ipcMain.handle('copy-files-to-backend', async (event, filePaths) => {
+  try {
+    // Get the backend directory path (one level up from UI folder)
+    const backendDir = path.join(__dirname, '..', 'backend');
+    const targetDir = path.join(backendDir, 'initial_frames');
+    
+    // Create the initial_frames directory if it doesn't exist
+    if (!fs.existsSync(targetDir)) {
+      fs.mkdirSync(targetDir, { recursive: true });
+    }
+    
+    const copiedFiles = [];
+    
+    for (const filePath of filePaths) {
+      const fileName = path.basename(filePath);
+      const targetPath = path.join(targetDir, fileName);
+      
+      // Copy the file
+      fs.copyFileSync(filePath, targetPath);
+      copiedFiles.push(targetPath);
+    }
+    
+    return { success: true, files: copiedFiles, count: copiedFiles.length };
+  } catch (error) {
+    console.error('Error copying files:', error);
+    return { success: false, error: error.message };
+  }
 });
 
 app.whenReady().then(createWindow);

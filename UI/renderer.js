@@ -149,10 +149,22 @@ blankContainer.addEventListener("click", async () => {
     return;
   }
 
-  addMessage(`Found ${pngFiles.length} PNG files:`, "bot");
-  pngFiles.forEach(file => {
-    addMessage(`${file}`, "bot");
-  });
-
-  // You can also pass the file list to the backend if needed
+  addMessage(`Found ${pngFiles.length} PNG files. Copying to backend...`, "bot");
+  
+  try {
+    const result = await window.electronAPI.copyFilesToBackend(pngFiles);
+    
+    if (result.success) {
+      addMessage(`✅ Successfully copied ${result.count} PNG files to backend/initial_frames/`, "bot");
+      addMessage(`Files copied:`, "bot");
+      result.files.forEach(file => {
+        const fileName = file.split('/').pop(); // Get just the filename
+        addMessage(`📁 ${fileName}`, "bot");
+      });
+    } else {
+      addMessage(`❌ Error copying files: ${result.error}`, "bot");
+    }
+  } catch (error) {
+    addMessage(`❌ Error: ${error.message}`, "bot");
+  }
 });
