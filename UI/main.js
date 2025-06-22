@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen } = require('electron');
+const { app, BrowserWindow, screen, ipcMain } = require('electron');
 const path = require('path');
 
 function createWindow() {
@@ -31,6 +31,10 @@ function createWindow() {
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
     },
+  });
+
+  ipcMain.on('app-close', () => {
+    mainWindow.close();
   });
 
   // Make window more transparent when it loses focus

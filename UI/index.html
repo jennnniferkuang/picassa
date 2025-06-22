@@ -6,21 +6,27 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <div id="navbar">
-      <div class="navbar-title">Picasso AI</div>
-      <div id="close-icon" class="navbar-icon">✕</div>
+    <div id="sidebar">
+      <div class="sidebar-button" id="home-button">🏠</div>
+      <div class="sidebar-button" id="settings-button">⚙️</div>
     </div>
-    <div id="chat-container">
-      <div id="messages">
-        <div class="message bot">Hi there! How can I help you today?</div>
+    <div id="main-content">
+      <div id="navbar">
+        <div class="navbar-title">Picasso AI</div>
+        <div id="close-icon" class="navbar-icon">✕</div>
       </div>
-      <div id="input-container">
-        <input
-          type="text"
-          id="message-input"
-          placeholder="Type your message..."
-        />
-        <button id="send-button">Analyze</button>
+      <div id="chat-container">
+        <div id="messages">
+          <div class="message bot">Hi there! How can I help you today?</div>
+        </div>
+        <div id="input-container">
+          <input
+            type="text"
+            id="message-input"
+            placeholder="Type your message..."
+          />
+          <button id="send-button">Analyze</button>
+        </div>
       </div>
     </div>
     <script src="renderer.js"></script>
