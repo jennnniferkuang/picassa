@@ -9,7 +9,7 @@ body {
 #sidebar {
   -webkit-app-region: drag;
   width: 60px;
-  background-color: rgba(60, 60, 60, 0.9);
+  background-color: rgba(60, 60, 60);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   flex-direction: column;
@@ -67,20 +67,6 @@ html {
   box-sizing: inherit;
 }
 
-#navbar {
-  -webkit-app-region: drag;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 15px;
-  background-color: rgba(60, 60, 60, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  height: 40px;
-  box-sizing: border-box;
-  border-radius: 0 15px 0 0;
-  flex-shrink: 0;
-}
-
 .navbar-title {
   color: white;
   font-size: 14px;
@@ -115,11 +101,11 @@ html {
   justify-content: space-between;
   align-items: center;
   padding: 10px 15px;
-  background-color: rgba(60, 60, 60, 0.9);
+  background-color: rgba(60, 60, 60);
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   height: 40px;
   box-sizing: border-box;
-  border-radius: 15px 15px 0 0;
+  border-radius: 0 15px 0 0;
 }
 
 .navbar-title {
@@ -152,10 +138,10 @@ html {
 
 #chat-container {
   -webkit-app-region: drag;
-  background-color: rgba(60, 60, 60, 0.5);
+  background-color: rgba(60, 60, 60);
   border-radius: 0 0 15px 0;
   flex: 1;
-  border-radius: 0 0 15px 15px;
+  border-radius: 0 0 15px 0;
   display: flex;
   flex-direction: column;
   padding: 15px;

@@ -4,14 +4,14 @@ import time
 
 # window_capture = "getWindow.py"
 # feedback = "critiqueResponse.py"  # changed from blip2.py
-# image_dir = "captured_images"
+image_dir = "captured_images"
 
 # ...existing code...
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 window_capture = os.path.join(BASE_DIR, "getWindow.py")
 feedback = os.path.join(BASE_DIR, "critiqueResponse.py")
-image_dir = os.path.abspath(os.path.join(BASE_DIR, "..", "captured_images"))
+# image_dir = os.path.abspath(os.path.join(BASE_DIR, "..", "captured_images"))
 # ...existing code...
 
 def wait_for_first_image():

@@ -28,6 +28,7 @@ function createWindow() {
     vibrancy: 'under-window',
     skipTaskbar: true,
     title: '',
+    hasShadow: true,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,
@@ -41,7 +42,7 @@ function createWindow() {
 
   // Make window more transparent when it loses focus
   mainWindow.on('blur', () => {
-    mainWindow.setOpacity(0.5);
+    mainWindow.setOpacity(0.9);
   });
 
   // Restore opacity when window gains focus
