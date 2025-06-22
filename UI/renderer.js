@@ -1,8 +1,6 @@
 const messages = document.getElementById("messages");
 const sendButton = document.getElementById("send-button");
 const closeIcon = document.getElementById("close-icon");
-const homeButton = document.getElementById("home-button");
-const settingsButton = document.getElementById("settings-button");
 
 // Backend URL - adjust this to match your Flask server
 const BACKEND_URL = 'http://localhost:5001';
