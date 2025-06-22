@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Picasso AI</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="sidebar">
+      <div class="sidebar-button active" id="chat-button">💬</div>
+      <div class="sidebar-button" id="blank-button">📄</div>
+    </div>
+    <div id="main-content">
+      <div id="navbar">
+        <div class="navbar-title">Picasso AI</div>
+        <div id="close-icon" class="navbar-icon">✕</div>
+      </div>
+      
+      <!-- Chat Page -->
+      <div id="chat-page" class="page active">
+        <div id="chat-container">
+          <div id="messages">
+            <div class="message bot">Hi there! How can I help you today?</div>
+          </div>
+          <div id="input-container">
+            <input
+              type="text"
+              id="message-input"
+              placeholder="Type your message..."
+            />
+            <button id="send-button">Analyze</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Blank Page -->
+      <div id="blank-page" class="page">
+        <div id="blank-container">
+          <img src="./filePicture.png" alt="Import frames" id="import-image">
+          <p>Import frames</p>
+        </div>
+      </div>
+    </div>
+    <script src="renderer.js"></script>
+    <script src="pageManager.js"></script>
+  </body>
+</html> 
