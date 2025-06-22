@@ -1,9 +1,17 @@
 const messages = document.getElementById("messages");
 const messageInput = document.getElementById("message-input");
 const sendButton = document.getElementById("send-button");
+const closeIcon = document.getElementById("close-icon");
 
 // Backend URL - adjust this to match your Flask server
 const BACKEND_URL = 'http://localhost:5001';
+
+// Close app functionality
+closeIcon.addEventListener("click", () => {
+  // Send message to main process to close the app
+  const { ipcRenderer } = require('electron');
+  ipcRenderer.send('app-close');
+});
 
 /**
  * Parses a complete string with markdown and converts it to HTML.

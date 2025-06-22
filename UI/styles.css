@@ -18,11 +18,52 @@ body {
   background: transparent;
 }
 
+#navbar {
+  -webkit-app-region: drag;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: rgba(60, 60, 60, 0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  height: 40px;
+  box-sizing: border-box;
+  border-radius: 15px 15px 0 0;
+}
+
+.navbar-title {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  -webkit-app-region: no-drag;
+}
+
+.navbar-icon {
+  color: white;
+  font-size: 14px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.navbar-icon:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ff4444;
+  transform: scale(1.1);
+}
+
 #chat-container {
   -webkit-app-region: drag;
   background-color: rgba(60, 60, 60, 0.5);
-  border-radius: 15px;
-  height: 100vh;
+  border-radius: 0 0 15px 15px;
+  height: calc(100vh - 40px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
