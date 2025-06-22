@@ -1,55 +1,4 @@
-body {
-  background: transparent;
-  display: flex;
-  height: 100vh;
-}
-
-#sidebar {
-  -webkit-app-region: drag;
-  width: 60px;
-  background-color: rgba(60, 60, 60, 0.9);
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 15px 0;
-  border-radius: 15px 0 0 15px;
-  overflow: hidden;
-}
-
-.sidebar-button {
-  -webkit-app-region: no-drag;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  font-size: 18px;
-  transition: all 0.2s ease;
-  background-color: transparent;
-  color: white;
-}
-
-.sidebar-button:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: scale(1.1);
-}
-
-.sidebar-button:active {
-  background-color: rgba(255, 255, 255, 0.3);
-  transform: scale(0.95);
-}
-
-#main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
+body,
 html {
   height: 100%;
   margin: 0;
@@ -57,7 +6,6 @@ html {
     Arial, sans-serif;
   color: white;
   box-sizing: border-box;
-  overflow: hidden;
 }
 
 *,
@@ -66,46 +14,8 @@ html {
   box-sizing: inherit;
 }
 
-#navbar {
-  -webkit-app-region: drag;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 15px;
-  background-color: rgba(60, 60, 60, 0.9);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  height: 40px;
-  box-sizing: border-box;
-  border-radius: 0 15px 0 0;
-  flex-shrink: 0;
-}
-
-.navbar-title {
-  color: white;
-  font-size: 14px;
-  font-weight: 500;
-  -webkit-app-region: no-drag;
-}
-
-.navbar-icon {
-  color: white;
-  font-size: 14px;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  -webkit-app-region: no-drag;
-  transition: all 0.2s ease;
-  border-radius: 50%;
-  background-color: transparent;
-}
-
-.navbar-icon:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  color: #ff4444;
-  transform: scale(1.1);
+body {
+  background: transparent;
 }
 
 #navbar {
@@ -152,9 +62,8 @@ html {
 #chat-container {
   -webkit-app-region: drag;
   background-color: rgba(60, 60, 60, 0.5);
-  border-radius: 0 0 15px 0;
-  flex: 1;
   border-radius: 0 0 15px 15px;
+  height: calc(100vh - 40px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -165,18 +74,11 @@ html {
   -webkit-app-region: no-drag;
   flex-grow: 1;
   overflow-y: auto;
-  overflow-x: hidden;
   padding: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-bottom: 10px;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-}
-
-#messages::-webkit-scrollbar {
-  display: none; /* Chrome, Safari and Opera */
 }
 
 .message {
@@ -205,8 +107,7 @@ html {
   padding: 5px 0 0 0;
   align-items: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  height: 40px;
-  flex-shrink: 0;
+  height: 45px;
 }
 
 #message-input {
@@ -270,3 +171,15 @@ html {
   content: "";
   margin-top: 0.5em;
 } 
+
+.send-button {
+  background-color: white;
+  border: none;
+  color: black;
+  border-radius: 15px;
+  padding: 10px 24px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 32px;
+  width: 10%; 
+}

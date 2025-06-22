@@ -1,18 +1,16 @@
-const { app, BrowserWindow, screen, ipcMain } = require('electron');
+const { app, BrowserWindow, screen } = require('electron');
 const path = require('path');
-const { spawn } = require("child_process");
-const os = require("os");
 
 function createWindow() {
   const { width: screenWidth, height: screenHeight } = screen.getPrimaryDisplay().workAreaSize;
   
   // Calculate window size as a percentage of screen size
-  const winWidth = Math.max(350, Math.min(500, screenWidth * 0.25)); // 25% of screen width, min 350px, max 500px
-  const winHeight = Math.max(400, Math.min(700, screenHeight * 0.4)); // 40% of screen height, min 400px, max 700px
+  const winWidth = Math.max(250, Math.min(400, screenWidth * 0.15)); // 15% of screen width, min 250px, max 400px
+  const winHeight = Math.max(300, Math.min(600, screenHeight * 0.25)); // 25% of screen height, min 300px, max 600px
   
   // Calculate minimum sizes based on screen size
-  const minWidth = Math.max(350, screenWidth * 0.15); // 15% of screen width, min 350px
-  const minHeight = Math.max(300, screenHeight * 0.25); // 25% of screen height, min 300px
+  const minWidth = Math.max(290, screenWidth * 0.1); // 10% of screen width, min 200px
+  const minHeight = Math.max(220, screenHeight * 0.15); // 15% of screen height, min 220px
 
   const mainWindow = new BrowserWindow({
     width: Math.round(winWidth),
@@ -35,10 +33,6 @@ function createWindow() {
     },
   });
 
-  ipcMain.on('app-close', () => {
-    mainWindow.close();
-  });
-
   // Make window more transparent when it loses focus
   mainWindow.on('blur', () => {
     mainWindow.setOpacity(0.5);
@@ -51,24 +45,6 @@ function createWindow() {
 
   mainWindow.loadFile('index.html');
 }
-
-// Use the correct Python executable depending on the platform
-const pythonExecutable = process.platform === 'win32' ? 'python' : 'python3';
-
-// Resolve the absolute path to main.py
-const backendScript = path.join(__dirname, '..', 'backend', 'main.py');
-
-// Spawn the backend process
-const backendProcess = spawn(
-  pythonExecutable,
-  [backendScript],
-  { stdio: 'inherit', shell: false }
-);
-
-// Optional: Handle backend process exit
-backendProcess.on('close', (code) => {
-  console.log(`Backend process exited with code ${code}`);
-});
 
 app.whenReady().then(createWindow);
 
