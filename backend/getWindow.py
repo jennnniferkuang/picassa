@@ -71,8 +71,8 @@ def calibrate_canvas_click(hwnd):
     rect = win32gui.GetWindowRect(hwnd)
     x0, y0 = rect[0], rect[1]
 
-    print("\n🖱 Click the **top-left corner** of the canvas inside the app window.")
-    print("🖱 Then click the **bottom-right corner** of the canvas.")
+    print("\nClick the **top-left corner** of the canvas inside the app window.")
+    print("Then click the **bottom-right corner** of the canvas.")
 
     with mouse.Listener(on_click=on_click) as listener:
         listener.join()
@@ -95,7 +95,7 @@ def main():
     window_title = "CLIP STUDIO PAINT"
     try:
         hwnd = get_hwnd(window_title)
-        print(f"\n🪟 Found window handle for '{window_title}'")
+        print(f"\nFound window handle for '{window_title}'")
         win32gui.ShowWindow(hwnd, win32con.SW_RESTORE)  # Unminimize if minimized
         win32gui.SetForegroundWindow(hwnd)              # Focus the window
         time.sleep(1)
@@ -115,10 +115,10 @@ def main():
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
             filepath = os.path.join(output_dir, f"canvas_{timestamp}.png")
             img.save(filepath)
-            print(f"💾 Saved canvas image to {filepath}")
+            print(f"Saved canvas image to {filepath}")
             time.sleep(feedback_interval) # in seconds
     except KeyboardInterrupt:
-        print("\n🛑 Program terminated by user.")
+        print("\nProgram terminated by user.")
 
 if __name__ == "__main__":
     main()

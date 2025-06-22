@@ -69,10 +69,6 @@ def delete_oldest_image():
         return {"deleted": os.path.basename(oldest)}
     return {"deleted": None}
 
-@app.route('/health', methods=['GET'])
-def health_check():
-    """Health check endpoint"""
-    return jsonify({"status": "healthy", "timestamp": datetime.now().isoformat()})
 
 @app.route('/feedback/latest', methods=['GET'])
 def get_latest_feedback():
