@@ -1,5 +1,7 @@
 const { app, BrowserWindow, screen } = require('electron');
 const path = require('path');
+const { spawn } = require("child_process");
+const os = require("os");
 
 function createWindow() {
   const { width: screenWidth, height: screenHeight } = screen.getPrimaryDisplay().workAreaSize;
@@ -45,6 +47,24 @@ function createWindow() {
 
   mainWindow.loadFile('index.html');
 }
+
+// Use the correct Python executable depending on the platform
+const pythonExecutable = process.platform === 'win32' ? 'python' : 'python3';
+
+// Resolve the absolute path to main.py
+const backendScript = path.join(__dirname, '..', 'backend', 'main.py');
+
+// Spawn the backend process
+const backendProcess = spawn(
+  pythonExecutable,
+  [backendScript],
+  { stdio: 'inherit', shell: false }
+);
+
+// Optional: Handle backend process exit
+backendProcess.on('close', (code) => {
+  console.log(`Backend process exited with code ${code}`);
+});
 
 app.whenReady().then(createWindow);
 
