@@ -167,6 +167,7 @@ html {
   display: flex;
   padding: 0;
   align-items: center;
+  justify-content: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   height: 40px;
   flex-shrink: 0;
@@ -193,12 +194,12 @@ html {
   border: none;
   color: black;
   border-radius: 15px;
-  padding: 8px 16px;
-  margin-left: 10px;
+  padding: 8px 24px;
+  margin-left: 0;
   cursor: pointer;
   font-size: 12px;
   height: 32px;
-  min-width: 50px;
+  min-width: 80px;
 }
 
 #send-button:hover {
