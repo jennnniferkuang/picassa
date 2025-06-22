@@ -171,3 +171,15 @@ body {
   content: "";
   margin-top: 0.5em;
 } 
+
+.send-button {
+  background-color: white;
+  border: none;
+  color: black;
+  border-radius: 15px;
+  padding: 10px 24px;
+  cursor: pointer;
+  font-size: 14px;
+  height: 32px;
+  width: 10%; 
+}
