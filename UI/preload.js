@@ -1,6 +1,6 @@
-const { contextBridge } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 
 // Expose any APIs if needed in the future
 contextBridge.exposeInMainWorld('electronAPI', {
-  // Add any future APIs here
+  closeApp: () => ipcRenderer.send('app-close')
 }); 
