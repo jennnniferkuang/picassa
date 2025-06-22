@@ -7,7 +7,9 @@ const BACKEND_URL = 'http://localhost:5001';
 
 // Close app functionality
 closeIcon.addEventListener("click", () => {
-  window.electronAPI.closeApp();
+  // Send message to main process to close the app
+  const { ipcRenderer } = require('electron');
+  ipcRenderer.send('app-close');
 });
 
 /**
@@ -120,11 +122,4 @@ async function analyzeLatestImage() {
   }
 }
 
-function handleSend() {
-  analyzeLatestImage();
-}
-
-sendButton.addEventListener("click", handleSend);
-
-// Initialize with the chat page active
-showPage('chat-page'); 
+sendButton.addEventListener("click", analyzeLatestImage); 
